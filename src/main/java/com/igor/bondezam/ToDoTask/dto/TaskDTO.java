@@ -25,12 +25,7 @@ public class TaskDTO {
     private LocalDateTime dueDate;
     
     private TaskPriority priority;
-    
-    /**
-     * Converte uma entidade Task para TaskDTO
-     * @param task entidade a ser convertida
-     * @return TaskDTO correspondente
-     */
+
     public static TaskDTO fromEntity(Task task) {
         return new TaskDTO(
                 task.getId(),

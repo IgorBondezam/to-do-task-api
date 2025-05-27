@@ -1,7 +1,7 @@
 package com.igor.bondezam.ToDoTask.service;
 
+import com.igor.bondezam.ToDoTask.context.UserContextHolder;
 import com.igor.bondezam.ToDoTask.domain.Task;
-import com.igor.bondezam.ToDoTask.domain.User;
 import com.igor.bondezam.ToDoTask.domain.enums.TaskPriority;
 import com.igor.bondezam.ToDoTask.repository.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -56,7 +56,7 @@ public class TaskService {
         task.setCompleted(false);
         task.setCreatedAt(LocalDateTime.now());
 
-        task.setUser(new User());
+        task.setUser(UserContextHolder.getUser());
 
         return taskRepository.save(task);
     }
