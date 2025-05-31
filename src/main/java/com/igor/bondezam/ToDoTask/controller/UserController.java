@@ -1,7 +1,6 @@
 package com.igor.bondezam.ToDoTask.controller;
 
 import com.igor.bondezam.ToDoTask.converter.UserConverter;
-import com.igor.bondezam.ToDoTask.domain.User;
 import com.igor.bondezam.ToDoTask.dto.req.UserReq;
 import com.igor.bondezam.ToDoTask.dto.res.UserRes;
 import com.igor.bondezam.ToDoTask.service.UserService;
@@ -11,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,15 +42,6 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
         service.deleteEntity(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping
-    public ResponseEntity<UserRes> createUser(@RequestBody UserReq userReq) {
-        User user = converter.reqToEntity(userReq);
-        if(Objects.nonNull(service.findByEmail(user.getEmail()))) {
-            throw new RuntimeException("This email user is alrealy used");
-        }
-        return ResponseEntity.status(201).body(converter.entityToRes(service.createOrUpdateEntity(user)));
     }
 
     private String passwordEncoder(String password) {
