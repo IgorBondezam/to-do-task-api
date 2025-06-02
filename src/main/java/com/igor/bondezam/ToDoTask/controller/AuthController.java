@@ -48,6 +48,7 @@ public class AuthController {
         if(Objects.nonNull(userService.findByEmail(user.getEmail()))) {
             throw new RuntimeException("This email user is alrealy used");
         }
+        user.setPassword(passwordEncoder(user.getPassword()));
         return ResponseEntity.status(201).body(converter.entityToRes(userService.createOrUpdateEntity(user)));
     }
 
@@ -71,5 +72,9 @@ public class AuthController {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    private String passwordEncoder(String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 }

@@ -14,6 +14,7 @@ public class UserConverter {
         User user = new User();
         user.setName(userReq.getName());
         user.setBirthdayDate(userReq.getBirthdayDate());
+        user.setPassword(userReq.getPassword());
         user.setCpf(userReq.getCpf());
         user.setEmail(userReq.getEmail());
         user.setHeight(userReq.getHeight());

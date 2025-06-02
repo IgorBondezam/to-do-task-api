@@ -29,7 +29,7 @@ public class FilterAspect {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Before("execution(public * org.springframework.data.repository.Repository+.*(..)) || bean(*Service)")
+    @Before("within(com.igor.bondezam..*) && (execution(public * org.springframework.data.repository.Repository+.*(..)) || bean(*Service))")
     public void beforeService() {
         Session session = (Session) em.getDelegate();
         if (session.isConnected()) {
