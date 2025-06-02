@@ -1,0 +1,50 @@
+enum TaskPriority {
+    LOW
+    MEDIUM
+    HIGH
+}
+
+type Task {
+    id: Int!
+    title: String!
+    description: String
+    completed: Boolean!
+    createdAt: String
+    updatedAt: String
+    dueDate: String
+    priority: TaskPriority
+}
+
+input TaskInput {
+    title: String!
+    description: String
+    completed: Boolean
+    dueDate: String
+    priority: TaskPriority
+}
+
+input TaskUpdateInput {
+    title: String
+    description: String
+    completed: Boolean
+    dueDate: String
+    priority: TaskPriority
+}
+
+type Query {
+    getAllTasks: [Task]!
+    getTaskById(id: Int!): Task
+    getTasksByStatus(completed: Boolean!): [Task]!
+    getTasksByPriority(priority: TaskPriority!): [Task]!
+    getOverdueTasks: [Task]!
+    getPendingTasks: [Task]!
+    searchTasksByTitle(title: String!): [Task]!
+    getDueDateBefore(date: String!): [Task]!
+}
+
+type Mutation {
+    createTask(task: TaskInput!): Task!
+    updateTask(id: Int!, task: TaskUpdateInput!): Task!
+    toggleTaskCompletion(id: Int!): Task!
+    deleteTask(id: Int!): Boolean!
+}
