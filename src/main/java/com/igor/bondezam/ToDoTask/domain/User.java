@@ -3,6 +3,7 @@ package com.igor.bondezam.ToDoTask.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.igor.bondezam.ToDoTask.domain.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -18,6 +19,7 @@ import java.util.List;
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"authorities"})
 @Table(name = "user_task")
+@Valid
 public class User implements UserDetails, Serializable {
 
     @Id
@@ -32,7 +34,7 @@ public class User implements UserDetails, Serializable {
     @CPF
     @NotBlank
     private String cpf;
-    @Email
+    @Email(message = "Invalid Email")
     @NotBlank
     private String email;
     private String password;

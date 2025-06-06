@@ -70,6 +70,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@Valid @RequestBody TaskDTO taskDTO) {
+        taskDTO.setId(null);
         Task task = taskDTO.toEntity();
         Task createdTask = taskService.createTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(TaskDTO.fromEntity(createdTask));
